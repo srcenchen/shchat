@@ -26,6 +26,8 @@ jobs:
     name: Release
     runs-on: ${{ matrix.platform }}
     steps:
+      - name: SSH Remote Commands
+        uses: appleboy/ssh-action@v0.1.7
       - name: Setup Go
         uses: actions/setup-go@v3
         with:
