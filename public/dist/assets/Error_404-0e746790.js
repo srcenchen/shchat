@@ -1,1 +1,0 @@
-import{z as t,A as s,B as r,C as o}from"./index-934f1aca.js";const c={class:"h-screen flex justify-center items-center"},n=o("h1",{class:"text-9xl p-8 text-center"},"Error 404",-1),_=[n],p={__name:"Error_404",setup(a){const e=t();return setTimeout(()=>{e.push("/")},4e3),(u,i)=>(s(),r("div",c,_))}};export{p as default};
