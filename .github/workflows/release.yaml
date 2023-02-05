@@ -43,7 +43,7 @@ jobs:
           sudo apt install upx
       - name: Build
         run: |
-          bash build.sh release
+          bash build.sh release shchat
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
