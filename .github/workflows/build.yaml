@@ -25,14 +25,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          docker pull crazymax/xgo:latest
-          go install github.com/crazy-max/xgo@latest
+          apt-get install gcc-mingw-w64 -y
           sudo apt install upx
       - name: Build
         run: |
-          bash builddev.sh
+          bash build.sh dev
       - name: Upload artifact
         uses: actions/upload-artifact@v3
         with:
-          name: SHChat
-          path: dist/*
+          name: apps
+          path: dist
