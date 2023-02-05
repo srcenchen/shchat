@@ -1,8 +1,7 @@
-appName="shchat"
+appName=$2
 
 BuildDev() {
   rm -rf .git/
-  mkdir -p "dist"
   BASE="https://musl.nn.ci/"
   FILES=(aarch64-linux-musl-cross)
   for i in "${FILES[@]}"; do
@@ -20,14 +19,14 @@ BuildDev() {
     export GOARCH=${os_arch##*-}
     export CC=${cgo_cc}
     export CGO_ENABLED=1
-    go build -o ./dist/$appName-$os_arch -tags=jsoniter .
+    go build -o ./build/$appName-$os_arch -tags=jsoniter .
   done
   xgo -targets=linux/amd64,windows/amd64,darwin/amd64 -out "$appName" -tags=jsoniter .
-
-  mv shchat-* dist
+  mkdir -p "dist"
+  mv $appName-* dist
   cd dist
-  upx -9 ./shchat-linux*
-  upx -9 ./shchat-windows*
+  upx -9 ./$appName-linux*
+  upx -9 ./$appName-windows*
   find . -type f -print0 | xargs -0 md5sum >md5.txt
   cat md5.txt
 }
@@ -57,28 +56,28 @@ BuildRelease() {
   done
   xgo -targets=linux/amd64,windows/amd64,darwin/amd64 -out "$appName" -tags=jsoniter .
   # why? Because some target platforms seem to have issues with upx compression
-  upx -9 ./shchat-linux-amd64
-  upx -9 ./shchat-windows*
-  mv shchat-* build
+  upx -9 ./$appName-linux-amd64
+  upx -9 ./$appName-windows*
+  mv $appName-* build
 }
 
 MakeRelease() {
   cd build
   mkdir compress
   for i in $(find . -type f -name "$appName-linux-*"); do
-    cp "$i" shchat
-    tar -czvf compress/"$i".tar.gz shchat
-    rm -f shchat
+    cp "$i" $appName
+    tar -czvf compress/"$i".tar.gz $appName
+    rm -f $appName
   done
   for i in $(find . -type f -name "$appName-darwin-*"); do
-    cp "$i" shchat
-    tar -czvf compress/"$i".tar.gz shchat
-    rm -f shchat
+    cp "$i" $appName
+    tar -czvf compress/"$i".tar.gz $appName
+    rm -f $appName
   done
   for i in $(find . -type f -name "$appName-windows-*"); do
-    cp "$i" shchat.exe
-    zip compress/$(echo $i | sed 's/\.[^.]*$//').zip shchat.exe
-    rm -f shchat.exe
+    cp "$i" $appName.exe
+    zip compress/$(echo $i | sed 's/\.[^.]*$//').zip $appName.exe
+    rm -f $appName.exe
   done
   cd compress
   find . -type f -print0 | xargs -0 md5sum >md5.txt
