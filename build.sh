@@ -2,6 +2,7 @@ appName="shchat"
 
 BuildDev() {
   rm -rf .git/
+  mkdir -p "dist"
   BASE="https://musl.nn.ci/"
   FILES=(aarch64-linux-musl-cross)
   for i in "${FILES[@]}"; do
@@ -19,10 +20,10 @@ BuildDev() {
     export GOARCH=${os_arch##*-}
     export CC=${cgo_cc}
     export CGO_ENABLED=1
-    go build -o ./build/$appName-$os_arch -tags=jsoniter .
+    go build -o ./dist/$appName-$os_arch -tags=jsoniter .
   done
   xgo -targets=linux/amd64,windows/amd64,darwin/amd64 -out "$appName" -tags=jsoniter .
-  mkdir -p "dist"
+
   mv shchat-* dist
   cd dist
   upx -9 ./shchat-linux*
