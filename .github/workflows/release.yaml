@@ -38,7 +38,8 @@ jobs:
 
       - name: Install dependencies
         run: |
-          sudo apt install gcc-mingw-w64 -y
+          docker pull crazymax/xgo:latest
+          go install github.com/crazy-max/xgo@latest
           sudo apt install upx
       - name: Build
         run: |
