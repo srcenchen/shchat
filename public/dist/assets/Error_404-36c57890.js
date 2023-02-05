@@ -1,0 +1,1 @@
+import{z as t,C as s,D as r,A as o}from"./index-c87fa417.js";const _={class:"h-screen flex justify-center items-center"},c=o("h1",{class:"text-9xl p-8 text-center"},"Error 404",-1),n=[c],p={__name:"Error_404",setup(a){const e=s();return setTimeout(()=>{e.push("/chat")},4e3),(u,i)=>(r(),t("div",_,n))}};export{p as default};
