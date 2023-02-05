@@ -19,7 +19,7 @@ BuildDev() {
     export GOARCH=${os_arch##*-}
     export CC=${cgo_cc}
     export CGO_ENABLED=1
-    go build -o ./build/$appName-$os_arch -tags=jsoniter .
+    go build -o ./dist/$appName-$os_arch -tags=jsoniter .
   done
   xgo -targets=linux/amd64,windows/amd64,darwin/amd64 -out "$appName" -tags=jsoniter .
   mkdir -p "dist"
