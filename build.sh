@@ -1,4 +1,4 @@
-appName=$2
+appName="shchat"
 
 BuildDev() {
   rm -rf .git/
