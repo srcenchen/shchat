@@ -25,7 +25,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          apt-get install gcc-mingw-w64 -y
+          sudo apt install gcc-mingw-w64 -y
           sudo apt install upx
       - name: Build
         run: |
