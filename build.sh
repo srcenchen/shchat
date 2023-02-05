@@ -10,7 +10,7 @@ BuildDev() {
     sudo tar xf "${i}.tgz" --strip-components 1 -C /usr/local
   done
   OS_ARCHES=(linux-musl-arm64)
-  CGO_ARGS=(x86_64-linux-musl-gcc aarch64-linux-musl-gcc)
+  CGO_ARGS=(aarch64-linux-musl-gcc)
   for i in "${!OS_ARCHES[@]}"; do
     os_arch=${OS_ARCHES[$i]}
     cgo_cc=${CGO_ARGS[$i]}
@@ -43,7 +43,7 @@ BuildRelease() {
     sudo tar xf "${i}.tgz" --strip-components 1 -C /usr/local
   done
   OS_ARCHES=(linux-musl-arm64)
-  CGO_ARGS=(x86_64-linux-musl-gcc aarch64-linux-musl-gcc)
+  CGO_ARGS=(aarch64-linux-musl-gcc)
   for i in "${!OS_ARCHES[@]}"; do
     os_arch=${OS_ARCHES[$i]}
     cgo_cc=${CGO_ARGS[$i]}
@@ -91,5 +91,5 @@ elif [ "$1" = "release" ]; then
   BuildRelease
   MakeRelease
 else
-  echo -e "Parameter error"
+  echo "Usage: $0 [dev|release]"
 fi
